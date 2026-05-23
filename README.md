@@ -367,7 +367,7 @@ If this repository is useful for your research, please cite the paper:
 
 ## License
 
-Please add the final license file before public release.
+This project is released under the Apache License 2.0. See [LICENSE](LICENSE) for details.
 
 ## Acknowledgements
 
