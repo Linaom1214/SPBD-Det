@@ -1,0 +1,54 @@
+[
+  {
+    "group": "main",
+    "source": "work_dirs/spd_irtiny_bd_10k_full_seed42/best.pth",
+    "weight": "release_assets/weights/main/spd_irtiny_bd_10k_best.pth",
+    "size_mb": 35.89,
+    "tensors": 536,
+    "params": 9355431,
+    "metrics": "release_assets/metrics/main/spd_irtiny_bd_10k_best_metrics.json",
+    "mIoU": 0.9155918912154835,
+    "paper_pixAcc": 0.9579471065724011,
+    "paper_PD": 0.9865391427559334,
+    "paper_FA": 0.5950927734375
+  },
+  {
+    "group": "multiseed",
+    "source": "work_dirs/spd_irtiny_bd_10k_full_seed42/best.pth",
+    "weight": "release_assets/weights/multiseed/spd_irtiny_bd_10k_seed42.pth",
+    "size_mb": 35.89,
+    "tensors": 536,
+    "params": 9355431,
+    "metrics": "release_assets/metrics/multiseed/spd_irtiny_bd_10k_seed42_metrics.json",
+    "mIoU": 0.9155918912154835,
+    "paper_pixAcc": 0.9579471065724011,
+    "paper_PD": 0.9865391427559334,
+    "paper_FA": 0.5950927734375
+  },
+  {
+    "group": "multiseed",
+    "source": "work_dirs/spd_irtiny_bd_10k_seed3407/best.pth",
+    "weight": "release_assets/weights/multiseed/spd_irtiny_bd_10k_seed3407.pth",
+    "size_mb": 35.89,
+    "tensors": 536,
+    "params": 9355431,
+    "metrics": "release_assets/metrics/multiseed/spd_irtiny_bd_10k_seed3407_metrics.json",
+    "mIoU": 0.8914693761783206,
+    "paper_pixAcc": 0.9327398097233133,
+    "paper_PD": 0.9569016412799622,
+    "paper_FA": 0.4673004150390625
+  },
+  {
+    "group": "multiseed",
+    "source": "work_dirs/spd_irtiny_bd_10k_seed2026/best.pth",
+    "weight": "release_assets/weights/multiseed/spd_irtiny_bd_10k_seed2026.pth",
+    "size_mb": 35.89,
+    "tensors": 536,
+    "params": 9355431,
+    "metrics": "release_assets/metrics/multiseed/spd_irtiny_bd_10k_seed2026_metrics.json",
+    "mIoU": 0.8898596725693284,
+    "paper_pixAcc": 0.9298594745570393,
+    "paper_PD": 0.9582004959263195,
+    "paper_FA": 0.7266998291015625
+  }
+]

@@ -1,0 +1,31 @@
+# Local reference material, harness settings, and reviewer/manuscript drafts
+refs/
+.claude/
+CLAUDE.md
+
+# Datasets and generated experiment outputs
+data/
+work_dirs/
+runs/
+outputs/
+checkpoints/
+*.pth
+*.pth.tar
+*.pt
+*.ckpt
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+.DS_Store
+.idea/
+.vscode/

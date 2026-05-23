@@ -1,0 +1,10 @@
+torch>=1.10
+torchvision>=0.11
+numpy
+Pillow
+tqdm
+PyYAML
+timm
+scikit-image
+matplotlib
+tensorboard

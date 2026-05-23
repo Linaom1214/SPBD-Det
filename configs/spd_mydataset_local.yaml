@@ -1,0 +1,60 @@
+# SPD configuration for a mydataset train/test layout.
+experiment_name: spd_mydataset_local
+seed: 42
+deterministic: true
+device: cuda
+
+model:
+  encoder_out_features: [64, 128, 256]
+  mask_depths: [1, 2, 4]
+  mask_num_head: 8
+  mask_mlp_dim: 2048
+  step_size: 0.1
+  t_total: 1.0
+  alpha: 0.5
+  beta: 0.5
+  sobel: true
+  without_spd: false
+  without_rep: false
+
+data:
+  root: ./data/mydataset
+  train_dir: train
+  val_dir: test
+  test_dir: test
+  image_dir: images
+  mask_dir: masks
+  suffixes: [png, jpg, jpeg, bmp, tif, tiff]
+  image_size: 512
+  crop_size: 512
+  normalize_mean: [0.485, 0.456, 0.406]
+  normalize_std: [0.229, 0.224, 0.225]
+  train_aug: false
+  mask_binarize: false
+  num_workers: 8
+  train_batch_size: 8
+  eval_batch_size: 8
+
+train:
+  epochs: 100
+  optimizer: AdamW
+  lr: 0.001
+  weight_decay: 0.001
+  betas: [0.9, 0.999]
+  loss:
+    ce_weight: 1.0
+    dice_weight: 1.0
+    token_contrast_weight: 1.0
+  scheduler:
+    type: poly
+    power: 0.9
+    min_lr: 0.0001
+    warmup_epochs: 5
+  val_interval: 1
+  save_dir: work_dirs
+  amp: false
+  grad_clip_norm: null
+
+eval:
+  threshold: 0.5
+  postprocess: none

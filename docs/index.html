@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPD | Decoupling Polarity with Self-Prompts</title>
+  <meta name="description" content="SPD is a polarity-aware infrared small target detection framework with self-prompt decoding for bright and dark target appearances.">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#top" aria-label="SPD home">
+        <span class="logo-mark">S</span>
+        <span>SPD</span>
+      </a>
+      <div class="nav-links" aria-label="Page navigation">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#release">Release</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">Infrared Small Target Detection</span>
+        <h1>Decoupling Polarity with Self-Prompts</h1>
+        <p class="lead">
+          SPD is a polarity-aware segmentation framework for dim infrared small targets whose appearance may switch between bright and dark under complex backgrounds, low signal-to-clutter ratios, and polarity reversal.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#release">Release status</a>
+          <a class="button" href="https://github.com/Linaom1214/SPBD-Det">GitHub repository</a>
+          <a class="button" href="#results">View results</a>
+          <span class="button disabled" aria-disabled="true">Paper coming after acceptance</span>
+        </div>
+        <div class="stats" aria-label="Key metrics">
+          <div class="stat"><strong>9.35M</strong><span>parameters</span></div>
+          <div class="stat"><strong>12.60G</strong><span>FLOPs at 512²</span></div>
+          <div class="stat"><strong>0.9156</strong><span>IRTiny-BD-10K mIoU</span></div>
+          <div class="stat"><strong>0.8515</strong><span>IRReversal/ch3 mIoU</span></div>
+        </div>
+      </div>
+      <figure class="hero-card">
+        <img src="assets/fig0.png" alt="Infrared targets changing from bright to dark under different backgrounds">
+        <figcaption>Infrared small targets can reverse polarity as their relation to the background changes.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <main>
+    <section id="method">
+      <div class="container">
+        <div class="section-head">
+          <h2>Polarity-aware self-prompt detection</h2>
+          <p>
+            SPD combines re-parameterized infrared feature extraction, adaptive edge denoising, and bright/dark prompt tokens to separate target polarity during mask decoding.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Rep-EFEM encoder</h3>
+            <p>Multi-stage infrared feature extraction with deploy-time branch fusion for efficient inference.</p>
+          </article>
+          <article class="card">
+            <h3>Adaptive edge denoising</h3>
+            <p>A learnable Sobel/PDE-inspired edge path strengthens weak target boundaries while suppressing clutter responses.</p>
+          </article>
+          <article class="card">
+            <h3>Self-prompt decoder</h3>
+            <p>Bright and dark learnable tokens guide feature selection and decouple opposite target appearances.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Architecture figures">
+      <div class="container figure-grid">
+        <figure class="figure-card wide">
+          <img src="assets/fig1.png" alt="SPD architecture with encoder, adaptive edge denoising, and self-prompt decoder">
+          <figcaption>Overall SPD architecture: Rep-EFEM encoder, edge embedding, and multi-stage self-prompt decoding.</figcaption>
+        </figure>
+        <figure class="figure-card">
+          <img src="assets/fig5-ro.png" alt="Self-prompt decoder module with bright and dark tokens">
+          <figcaption>Self-prompt decoder module with bright and dark polarity tokens.</figcaption>
+        </figure>
+        <figure class="figure-card">
+          <img src="assets/distribution.png" alt="Statistical characterization of the IRReversal dataset">
+          <figcaption>IRReversal statistics used to characterize polarity and scene diversity.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="container">
+        <div class="section-head">
+          <h2>Main reproduction results</h2>
+          <p>
+            The public repository is prepared around reproducible training and evaluation on IRReversal/ch3 and IRTiny-BD-10K, with metric definitions aligned to the paper protocol.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>Split size</th>
+                <th>pixAcc</th>
+                <th>mIoU</th>
+                <th>PD</th>
+                <th>FA_raw</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IRReversal/ch3</td>
+                <td>17,915</td>
+                <td>0.911425</td>
+                <td>0.851500</td>
+                <td>0.964890</td>
+                <td>4.281660e-06</td>
+              </tr>
+              <tr>
+                <td>IRTiny-BD-10K</td>
+                <td>2,000</td>
+                <td>0.939007</td>
+                <td>0.889078</td>
+                <td>0.957138</td>
+                <td>5.760193e-07</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Datasets</h2>
+          <p>
+            SPD is evaluated on the IRReversal/ch3 dataset constructed in this work and public infrared small-target benchmarks.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>IRReversal/ch3</h3>
+            <p>The dataset constructed in this work is available by contacting <a href="mailto:linaom1214@163.com">linaom1214@163.com</a>.</p>
+          </article>
+          <article class="card">
+            <h3>IRTiny-BD-10K</h3>
+            <p>Public bright/dark infrared small-target benchmark: <a href="https://github.com/kourenke/IRTiny-BD-10K-Datasets">dataset repository</a>.</p>
+          </article>
+          <article class="card">
+            <h3>SIRST-Aug</h3>
+            <p>Public benchmark released with AGPCNet: <a href="https://github.com/Tianfang-Zhang/AGPCNet">dataset repository</a>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <h2>Qualitative examples</h2>
+          <p>Representative cases include low-contrast targets, cloud interference, structured aircraft contours, and complex ground clutter.</p>
+        </div>
+        <div class="figure-grid">
+          <figure class="figure-card"><img src="assets/1.png" alt="Low-contrast target in a desert scene"><figcaption>Low-contrast target in a desert scene.</figcaption></figure>
+          <figure class="figure-card"><img src="assets/2.png" alt="Target under dense cloud interference"><figcaption>Target under dense cloud interference.</figcaption></figure>
+          <figure class="figure-card"><img src="assets/3.png" alt="Structured aircraft target contour extraction"><figcaption>Structured aircraft target contour extraction.</figcaption></figure>
+          <figure class="figure-card"><img src="assets/4.png" alt="Target detection in a complex ground scene"><figcaption>Robust detection under strong ground-scene interference.</figcaption></figure>
+          <figure class="figure-card"><img src="assets/fig8.png" alt="Bright and dark token attention visualization"><figcaption>Bright/dark token attention visualization.</figcaption></figure>
+          <figure class="figure-card"><img src="assets/failure_plot.png" alt="Representative failure cases"><figcaption>Representative failure cases for transparent error analysis.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="release">
+      <div class="container">
+        <div class="release-box">
+          <div>
+            <h2>Release plan</h2>
+            <p>
+              The public repository, training scripts, evaluation protocol, and pretrained weights are being prepared now. Final paper links, citation metadata, dataset notes, and downloadable checkpoints should be enabled after formal acceptance.
+            </p>
+          </div>
+          <div class="badges" aria-label="Release checklist">
+            <span class="badge">Code ready</span>
+            <span class="badge">Weights prepared</span>
+            <span class="badge">GitHub Pages assets copied</span>
+            <span class="badge">Paper link pending</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Quick start after release</h2>
+          <p>Commands mirror the reproducibility scripts in the repository and can be updated with final checkpoint paths before publication.</p>
+        </div>
+        <div class="code-card">
+          <pre><code>pip install -r requirements.txt
+python train.py --config configs/spd_irtiny_bd_10k.yaml
+python test.py --config configs/spd_irtiny_bd_10k.yaml --checkpoint work_dirs/spd_irtiny_bd_10k/best.pth --save-pred
+python inference.py --config configs/spd_mydata.yaml --checkpoint work_dirs/spd_mydata/best.pth --img-dir demo/images --out-dir demo/predictions</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>SPD: Decoupling Polarity with Self-Prompts for Infrared Small Target Detection. This page uses local assets copied into <code>docs/assets/</code> so it can be published independently of manuscript reference files.</p>
+    </div>
+  </footer>
+</body>
+</html>
