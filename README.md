@@ -1,14 +1,14 @@
-# SPD: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection
+# SPBD-Det: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection
 
-Official implementation of **SPD**, the method proposed in *Decoupling Polarity with Self-Prompts: A New Framework for Bright-Dark Infrared Small Target Detection*.
+Official implementation of **SPBD-Det**, the method proposed in *Decoupling Polarity with Self-Prompts: A New Framework for Bright-Dark Infrared Small Target Detection*.
 
 Project page and repository: https://github.com/Linaom1214/SPBD-Det
 
-SPD targets bright-dark infrared small target detection with a polarity-aware segmentation framework. It takes a single infrared image frame as input and predicts a binary target mask by combining a re-parameterized infrared feature encoder, an adaptive edge denoising/enhancement module, and a self-prompt decoder with bright/dark learnable tokens.
+SPBD-Det targets bright-dark infrared small target detection with a polarity-aware segmentation framework. It takes a single infrared image frame as input and predicts a binary target mask by combining a re-parameterized infrared feature encoder, an adaptive edge denoising/enhancement module, and a self-prompt decoder with bright/dark learnable tokens.
 
 ## Method overview
 
-SPD is designed for infrared small targets whose appearance may switch between bright and dark under complex backgrounds and low signal-to-clutter conditions.
+SPBD-Det is designed for infrared small targets whose appearance may switch between bright and dark under complex backgrounds and low signal-to-clutter conditions.
 
 | Component | Configuration | Role |
 | --- | --- | --- |
@@ -52,15 +52,15 @@ Measured with input size `1 x 3 x 512 x 512`.
 
 | Model | Params (M) | FLOPs (G) | Latency (ms) | FPS | Memory (MB) |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Full SPD | 9.35 | 12.60 | 48.88 | 20.46 | 343.58 |
-| Full SPD, deploy-fused | 9.30 | 12.36 | 42.72 | 23.41 | 343.46 |
+| Full SPBD-Det | 9.35 | 12.60 | 48.88 | 20.46 | 343.58 |
+| Full SPBD-Det, deploy-fused | 9.30 | 12.36 | 42.72 | 23.41 | 343.46 |
 
 ## Repository structure
 
 ```text
 configs/                  Experiment configurations
 scripts/                  Multi-seed and complexity launch scripts
-spdnet/                   SPD model, data pipeline, losses, metrics, optimizer
+spdnet/                   SPBD-Det model, data pipeline, losses, metrics, optimizer
   data.py                 Binary segmentation dataset and dataloader
   losses.py               Cross-entropy, Dice, and token contrastive losses
   metrics.py              Paper-compatible and thresholded metrics

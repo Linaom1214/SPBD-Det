@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SPD | Decoupling Polarity with Self-Prompts</title>
-  <meta name="description" content="SPD: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection.">
-  <link rel="stylesheet" href="assets/site.css">
+  <title>SPBD-Det | Decoupling Polarity with Self-Prompts</title>
+  <meta name="description" content="SPBD-Det: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection.">
+  <link rel="stylesheet" href="/SPBD-Det/assets/site.css">
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#top" aria-label="SPD project page">
-        <span class="brand-mark">SPD</span>
+      <a class="brand" href="#top" aria-label="SPBD-Det project page">
+        <span class="brand-mark">SPBD-Det</span>
         <span>Project Page</span>
       </a>
       <div class="nav-links" aria-label="Page navigation">
@@ -36,7 +36,7 @@
         <a class="button muted" href="#citation">BibTeX</a>
       </div>
       <figure class="hero-figure">
-        <img src="assets/fig0.png" alt="Bright-dark infrared small target examples and polarity changes">
+        <img src="/SPBD-Det/assets/fig0.png" alt="Bright-dark infrared small target examples and polarity changes">
         <figcaption>Bright-dark infrared small targets exhibit weak contrast, tiny spatial extent, and polarity reversal across complex backgrounds.</figcaption>
       </figure>
     </div>
@@ -47,7 +47,7 @@
       <div class="container narrow">
         <h2>Abstract</h2>
         <p>
-          SPD addresses bright-dark infrared small target detection by explicitly decoupling target polarity during segmentation. The framework combines a re-parameterized feature encoder, adaptive edge denoising/enhancement, and a self-prompt decoder with learnable bright and dark tokens, enabling robust detection under low signal-to-clutter ratios, clutter interference, and polarity reversal.
+          SPBD-Det addresses bright-dark infrared small target detection by explicitly decoupling target polarity during segmentation. The framework combines a re-parameterized feature encoder, adaptive edge denoising/enhancement, and a self-prompt decoder with learnable bright and dark tokens, enabling robust detection under low signal-to-clutter ratios, clutter interference, and polarity reversal.
         </p>
       </div>
     </section>
@@ -59,8 +59,8 @@
           <h2>Self-prompted polarity decoupling</h2>
         </div>
         <figure class="paper-figure large">
-          <img src="assets/fig1.png" alt="SPD architecture">
-          <figcaption>Overall SPD architecture with Rep-EFEM feature extraction, edge-aware embedding, and multi-stage self-prompt decoding.</figcaption>
+          <img src="/SPBD-Det/assets/fig1.png" alt="SPBD-Det architecture">
+          <figcaption>Overall SPBD-Det architecture with Rep-EFEM feature extraction, edge-aware embedding, and multi-stage self-prompt decoding.</figcaption>
         </figure>
         <div class="method-grid">
           <article>
@@ -77,7 +77,7 @@
           </article>
         </div>
         <figure class="paper-figure">
-          <img src="assets/fig5-ro.png" alt="Self-prompt decoder details">
+          <img src="/SPBD-Det/assets/fig5-ro.png" alt="Self-prompt decoder details">
           <figcaption>Self-prompt decoder details: polarity-specific prompts interact with image features through token-to-image and image-to-token attention.</figcaption>
         </figure>
       </div>
@@ -154,7 +154,7 @@
           </p>
         </div>
         <figure class="paper-figure">
-          <img src="assets/distribution.png" alt="IRReversal distribution analysis">
+          <img src="/SPBD-Det/assets/distribution.png" alt="IRReversal distribution analysis">
           <figcaption>Distribution analysis of the dataset constructed in this work.</figcaption>
         </figure>
       </div>
@@ -167,18 +167,18 @@
           <h2>Detection under difficult infrared scenes</h2>
         </div>
         <div class="gallery">
-          <figure><img src="assets/1.png" alt="Low-contrast infrared target"><figcaption>Low contrast</figcaption></figure>
-          <figure><img src="assets/2.png" alt="Infrared target under cloud interference"><figcaption>Cloud interference</figcaption></figure>
-          <figure><img src="assets/3.png" alt="Structured aircraft target"><figcaption>Structured target</figcaption></figure>
-          <figure><img src="assets/4.png" alt="Complex ground-scene clutter"><figcaption>Ground clutter</figcaption></figure>
+          <figure><img src="/SPBD-Det/assets/1.png" alt="Low-contrast infrared target"><figcaption>Low contrast</figcaption></figure>
+          <figure><img src="/SPBD-Det/assets/2.png" alt="Infrared target under cloud interference"><figcaption>Cloud interference</figcaption></figure>
+          <figure><img src="/SPBD-Det/assets/3.png" alt="Structured aircraft target"><figcaption>Structured target</figcaption></figure>
+          <figure><img src="/SPBD-Det/assets/4.png" alt="Complex ground-scene clutter"><figcaption>Ground clutter</figcaption></figure>
         </div>
         <div class="figure-pair">
           <figure class="paper-figure">
-            <img src="assets/fig8.png" alt="Bright and dark prompt token visualization">
+            <img src="/SPBD-Det/assets/fig8.png" alt="Bright and dark prompt token visualization">
             <figcaption>Bright/dark prompt visualization demonstrates polarity-specific feature responses.</figcaption>
           </figure>
           <figure class="paper-figure">
-            <img src="assets/failure_plot.png" alt="Representative failure cases">
+            <img src="/SPBD-Det/assets/failure_plot.png" alt="Representative failure cases">
             <figcaption>Representative failure cases provide transparent error analysis.</figcaption>
           </figure>
         </div>
@@ -213,7 +213,7 @@ python test.py --config configs/spd_irtiny_bd_10k.yaml --checkpoint work_dirs/sp
 
   <footer class="footer">
     <div class="container">
-      <p>SPD: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection.</p>
+      <p>SPBD-Det: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection.</p>
     </div>
   </footer>
 </body>
