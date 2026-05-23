@@ -2,7 +2,9 @@
 
 Official implementation of **SPBD-Det**, the method proposed in *Decoupling Polarity with Self-Prompts: A New Framework for Bright-Dark Infrared Small Target Detection*.
 
-Project page and repository: https://github.com/Linaom1214/SPBD-Det
+Project page: https://linaom1214.github.io/SPBD-Det/
+
+Repository: https://github.com/Linaom1214/SPBD-Det
 
 SPBD-Det targets bright-dark infrared small target detection with a polarity-aware segmentation framework. It takes a single infrared image frame as input and predicts a binary target mask by combining a re-parameterized infrared feature encoder, an adaptive edge denoising/enhancement module, and a self-prompt decoder with bright/dark learnable tokens.
 
