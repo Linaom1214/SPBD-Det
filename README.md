@@ -1,27 +1,14 @@
-# SPD: Decoupling Polarity with Self-Prompts for Infrared Small Target Detection
+# SPD: Decoupling Polarity with Self-Prompts for Bright-Dark Infrared Small Target Detection
 
-Official implementation of **SPD**, a polarity-aware infrared small-target segmentation framework for bright/dark target detection under polarity reversal and low signal-to-clutter conditions.
+Official implementation of **SPD**, the method proposed in *Decoupling Polarity with Self-Prompts: A New Framework for Bright-Dark Infrared Small Target Detection*.
 
 Project page and repository: https://github.com/Linaom1214/SPBD-Det
 
-SPD takes a single infrared image frame as input and predicts a binary target mask. The model combines a re-parameterized infrared feature encoder, an adaptive edge denoising/enhancement module, and a self-prompt decoder with bright/dark learnable tokens to decouple target polarity during mask decoding.
-
-## Highlights
-
-- **Polarity-aware decoding**: bright and dark self-prompt tokens explicitly separate opposite target appearances in infrared scenes.
-- **Edge-aware denoising**: a learnable Sobel/PDE-inspired module enhances weak boundaries while suppressing clutter responses.
-- **Efficient deployment**: the re-parameterized encoder supports deploy-time branch fusion through `--deploy`.
-- **Reproducible release**: training, evaluation, multi-seed, complexity, and inference scripts are included.
-
-## News
-
-- Public release repository prepared for reviewer-requested reproducibility checks.
-- Supports strict reproduction of paper metrics on IRReversal/ch3 and IRTiny-BD-10K.
-- Includes scripts for multi-seed reporting, complexity benchmarking, and failure-case visualization.
+SPD targets bright-dark infrared small target detection with a polarity-aware segmentation framework. It takes a single infrared image frame as input and predicts a binary target mask by combining a re-parameterized infrared feature encoder, an adaptive edge denoising/enhancement module, and a self-prompt decoder with bright/dark learnable tokens.
 
 ## Method overview
 
-SPD is designed for binary segmentation of dim and small infrared targets whose polarity may change from bright to dark across scenes.
+SPD is designed for infrared small targets whose appearance may switch between bright and dark under complex backgrounds and low signal-to-clutter conditions.
 
 | Component | Configuration | Role |
 | --- | --- | --- |
@@ -41,11 +28,11 @@ where `L_token` separates bright and dark prompt token embeddings with a cosine-
 
 ## Main results
 
-Strict paper-metric reproduction uses foreground IoU/pixel accuracy and target-level probability of detection / false alarm definitions compatible with the original evaluation protocol.
+Strict paper-metric reproduction uses foreground IoU/pixel accuracy and target-level probability of detection / false alarm definitions compatible with the paper evaluation protocol.
 
 | Dataset | Split size | pixAcc | mIoU | PD | FA_raw |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| IRReversal/ch3 | 17,915 | 0.911425 | 0.851500 | 0.964890 | 4.281660e-06 |
+| IRReversal | 17,915 | 0.911425 | 0.851500 | 0.964890 | 4.281660e-06 |
 | IRTiny-BD-10K | 2,000 | 0.939007 | 0.889078 | 0.957138 | 5.760193e-07 |
 
 For false-alarm reporting, this repository writes `FA_raw`, `FA_x1e6`, and `FA_x1e7` to avoid ambiguity between logs and paper tables.
@@ -117,10 +104,9 @@ data/<dataset>/
 
 Dataset access:
 
-- **IRReversal/ch3**: the dataset constructed in this work is available by contacting `linaom1214@163.com`.
+- **IRReversal**: the dataset constructed in this work is available by contacting `linaom1214@163.com`.
 - **IRTiny-BD-10K**: public benchmark dataset, available at https://github.com/kourenke/IRTiny-BD-10K-Datasets.
 - **SIRST-Aug**: public benchmark dataset released with AGPCNet, available at https://github.com/Tianfang-Zhang/AGPCNet.
-
 
 Requirements:
 
@@ -245,23 +231,21 @@ Predicted masks are resized back to the original image size and saved with the i
 
 ## Reproducing paper metrics
 
-### IRReversal/ch3 strict split
+### IRReversal strict split
 
-The historical IRReversal/ch3 paper split is the 17,915-image `mulframe` test split reconstructed from saved prediction names. Do not replace it with smaller local folders when reproducing the paper table.
+The historical IRReversal paper split is the 17,915-image test split reconstructed from saved prediction names. Do not replace it with smaller local folders when reproducing the paper table.
 
 ```bash
 python tools/make_mulframe_split_from_predictions.py \
   --mulframe-root /path/to/mulframe \
   --pred-dir /path/to/original_predictions \
-  --out-dir work_dirs/ch3_mulframe_split
-
-python tools/check_dataset.py --config configs/spd_ch3_mulframe_abc.yaml
+  --out-dir work_dirs/irreversal_split
 
 python tools/eval_saved_predictions.py \
   --pred-dir /path/to/original_predictions \
   --mask-root /path/to/mulframe/masks \
-  --split-file work_dirs/ch3_mulframe_split/test_mydataset.txt \
-  --out work_dirs/ch3_mulframe_split/saved_prediction_metrics.json
+  --split-file work_dirs/irreversal_split/test_mydataset.txt \
+  --out work_dirs/irreversal_split/saved_prediction_metrics.json
 ```
 
 Expected strict metrics:
@@ -320,36 +304,6 @@ Run all configured variants:
 bash scripts/run_complexity.sh configs/spd_irtiny_bd_10k.yaml work_dirs/complexity
 python tools/summarize_complexity.py work_dirs/complexity/*.json
 ```
-
-## Reproducibility defaults
-
-| Item | Default |
-| --- | --- |
-| Input size | `512 x 512` |
-| Image conversion | RGB-converted infrared image |
-| Normalization | mean `[0.485, 0.456, 0.406]`, std `[0.229, 0.224, 0.225]` |
-| Mask foreground | pixel value `> 127` |
-| Optimizer | AdamW |
-| Learning rate | `1e-3` |
-| Weight decay | `1e-3` |
-| Batch size | `8` train / `8` eval by default |
-| Epochs | `100` |
-| Scheduler | polynomial decay, power `0.9` |
-| Warmup | `5` epochs |
-| Minimum LR | `1e-4` |
-| Seed | `42` |
-| AMP | disabled by default |
-| Inference threshold | foreground probability `0.5` |
-| Post-processing | none |
-
-## Checkpoints and datasets
-
-For a complete reproducibility package, release users should be able to obtain:
-
-- final train/val/test split files or folder layouts;
-- pretrained `best.pth` checkpoints for the reported tables;
-- logs or metric JSON files corresponding to the paper results;
-- dataset construction and annotation notes for IRReversal/ch3.
 
 ## Citation
 
